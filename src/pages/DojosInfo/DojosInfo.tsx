@@ -9,10 +9,8 @@ import { Loader } from "@/components/spinner/Loader";
 import {
   MapPin, Mail, Globe, Clock,
   Sword, Target, Zap, Instagram, Facebook, Youtube, Twitter, ChevronRight,
-  CheckCircle, GraduationCap,
-  ShieldCheck, Play, Medal, Flag, Target as TargetLucide, UserCheck, Book,
-  Quote, Shield, Users as UsersLucide,
-  Award as AwardLucide
+  ShieldCheck, Play, Medal, Flag, UserCheck,
+  Shield, Users as UsersLucide, Heart
 } from "lucide-react";
 import { FaRegUserCircle } from "react-icons/fa";
 import CarouselComponent from "@/components/CarouselComponent";
@@ -32,7 +30,7 @@ type MainTabId = "about" | "masters" | "gallery" | "contact";
 const MAIN_TAB_SECTIONS: { id: MainTabId; label: string; icon: typeof Globe }[] = [
   { id: "about", label: "Dojo", icon: ShieldCheck },
   { id: "masters", label: "Maestros", icon: UsersLucide },
-  { id: "gallery", label: "Galeria", icon: Play },
+  // { id: "gallery", label: "Galeria", icon: Play },
   { id: "contact", label: "Contacto", icon: Mail },
 ];
 
@@ -43,9 +41,9 @@ const dojoData = {
   slogan: "Donde cada paso fortalece el carácter",
 
   about: {
-    description: "Fundado por el Gran Maestro Takashi Sato, nuestro dojo es más que un lugar de entrenamiento: es una escuela de vida. Por más de 30 años, hemos formado no solo excelentes artistas marciales, sino también personas íntegras con valores sólidos.",
+    description: "Dojo Perteneciente a la Organización Hiramatsukai.",
     philosophy: "Creemos que las artes marciales son un vehículo para el desarrollo humano integral. Cada técnica, cada kata, cada combate es una lección sobre perseverancia, respeto y superación personal.",
-    affiliation: "Afiliado oficial a la Organización Hiramatsukai desde 1995. Mantenemos los estándares más altos de calidad en enseñanza y preservación de las tradiciones marciales."
+    affiliation: ""
   },
 
   disciplines: [
@@ -177,26 +175,12 @@ const dojoData = {
   ],
 
   values: [
-    {
-      title: "Disciplina (Shitsuke)",
-      description: "La constancia en la práctica forja el carácter. Sin disciplina no hay progreso verdadero.",
-      icon: TargetLucide
-    },
-    {
-      title: "Respeto (Sonkei)",
-      description: "Hacia el sensei, los sempai, los kohai y el dojo. El respeto es la base de las relaciones marciales.",
-      icon: UserCheck
-    },
-    {
-      title: "Humildad (Kenkyo)",
-      description: "El verdadero conocimiento comienza reconociendo lo que no sabemos. La arrogancia es el peor enemigo.",
-      icon: Book
-    },
-    {
-      title: "Perseverancia (Nintai)",
-      description: "Caer siete veces, levantarse ocho. El camino marcial se recibe paso a paso, no de un salto.",
-      icon: Flag
-    }
+    { title: "Amor", description: "El amor por las artes marciales y por nuestros compañeros nos impulsa a crecer y superarnos cada día.", icon: Heart },
+    { title: "Honestidad", description: "La honestidad es la base de la confianza. Ser sinceros con nosotros mismos y con los demás nos fortalece como individuos.", icon: ShieldCheck },
+    { title: "Respeto", description: "Hacia el sensei, los sempai, los kohai y el dojo. El respeto es la base de las relaciones marciales.", icon: UserCheck },
+    { title: "Disciplina", description: "La constancia en la práctica forja el carácter. Sin disciplina no hay progreso verdadero.", icon: Target },
+    { title: "Motivación", description: "Cada entrenamiento es una oportunidad para superar nuestros límites y alcanzar nuevas metas.", icon: Zap },
+    { title: "Lealtad", description: "Lealtad al dojo, a nuestros maestros y a nuestros principios. El compromiso nos define.", icon: Flag },
   ],
 
   principles: [
@@ -317,7 +301,7 @@ export default function DojoPage() {
                     <div key={`${day}-${item.name}-${item.startTime}-${index}`} className="text-gray-700 flex items-center gap-2 text-xs">
                       <p>{item.name}: {item.startTime} - {item.endTime}</p>
                       <p>|</p>
-                      <img src={`/${item.martialArts.icon}`} alt="" className='w-8 h-8' />
+                      <img src={`/${item.martialArts.icon}`} alt="" className={`${item.martialArts.martialArt === 'Kobudo' ? 'w-9 h-7' : 'w-9 h-9'}`} />
                       <p>{item.martialArts.martialArt}</p>
                     </div>
                   ))}
@@ -389,6 +373,7 @@ export default function DojoPage() {
     }
 
     if (social === "facebook") {
+      console.log(value)
       return `https://www.facebook.com/${value}`;
     }
 
@@ -548,7 +533,8 @@ export default function DojoPage() {
                   <TabsContent value="about" className="space-y-12 mt-8">
                     {/* Sección Acerca del Dojo */}
                     <section>
-                      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                      {/* <div className="grid grid-cols-1 lg:grid-cols-2 gap-8"> */}
+                      <div className="text-center">
                         <div>
                           <h2 className="text-2xl font-bold text-gray-900 mb-4" style={{ fontFamily: "Kavoon" }}>
                             Nuestra Historia y Filosofía
@@ -560,7 +546,7 @@ export default function DojoPage() {
                             {dojoData.about.philosophy}
                           </p>
 
-                          <div className="bg-yellow-50 border-l-4 border-yellow-500 p-6 rounded-r-lg mb-6">
+                          {/* <div className="bg-yellow-50 border-l-4 border-yellow-500 p-6 rounded-r-lg mb-6">
                             <div className="flex items-start gap-3">
                               <Quote className="h-6 w-6 text-yellow-600 mt-1 shrink-0" />
                               <div>
@@ -570,10 +556,10 @@ export default function DojoPage() {
                                 <p className="text-gray-600 text-sm mt-2">— Sensei Takashi Sato, Fundador</p>
                               </div>
                             </div>
-                          </div>
+                          </div> */}
                         </div>
 
-                        <div>
+                        {/* <div>
                           <h3 className="text-xl font-bold text-gray-900 mb-4">Afiliación y Certificaciones</h3>
                           <Card className="border-2 border-red-200">
                             <CardContent className="p-6">
@@ -607,7 +593,7 @@ export default function DojoPage() {
                               </div>
                             </CardContent>
                           </Card>
-                        </div>
+                        </div> */}
                       </div>
                     </section>
 
@@ -640,7 +626,7 @@ export default function DojoPage() {
                     <Separator />
 
                     {/* Principios */}
-                    <section>
+                    {/* <section>
                       <h2 className="text-2xl font-bold text-center text-gray-900 mb-8" style={{ fontFamily: "Kavoon" }}>
                         Principios del Dojo
                       </h2>
@@ -657,7 +643,7 @@ export default function DojoPage() {
                           ))}
                         </div>
                       </div>
-                    </section>
+                    </section> */}
                   </TabsContent>
 
                   {/* Pestaña: Artes Marciales */}
@@ -869,46 +855,7 @@ export default function DojoPage() {
                       ))}
                     </div>
 
-                    {/* Línea de Maestros */}
-                    <section className="hidden bg-gray-50 rounded-2xl p-8">
-                      <h3 className="text-2xl font-bold text-center text-gray-900 mb-6" style={{ fontFamily: "Kavoon" }}>
-                        Línea de Transmisión
-                      </h3>
-
-                      <div className="max-w-4xl mx-auto">
-                        <div className="relative">
-                          <div className="flex flex-col md:flex-row justify-between items-center">
-                            <div className="text-center mb-6 md:mb-0">
-                              <div className="h-16 w-16 rounded-full bg-linear-to-br from-gray-900 to-black flex items-center justify-center mx-auto mb-3">
-                                <GraduationCap className="h-8 w-8 text-white" />
-                              </div>
-                              <h4 className="font-bold text-gray-900">Gran Maestro Kenwa Mabuni</h4>
-                              <p className="text-sm text-gray-600">Fundador Shito-Ryu</p>
-                            </div>
-
-                            <ChevronRight className="h-8 w-8 text-gray-400 hidden md:block" />
-
-                            <div className="text-center mb-6 md:mb-0">
-                              <div className="h-16 w-16 rounded-full bg-linear-to-br from-red-600 to-red-800 flex items-center justify-center mx-auto mb-3">
-                                <UsersLucide className="h-8 w-8 text-white" />
-                              </div>
-                              <h4 className="font-bold text-gray-900">Sensei Takashi Sato</h4>
-                              <p className="text-sm text-gray-600">Discípulo Directo</p>
-                            </div>
-
-                            <ChevronRight className="h-8 w-8 text-gray-400 hidden md:block" />
-
-                            <div className="text-center">
-                              <div className="h-16 w-16 rounded-full bg-linear-to-br from-blue-600 to-blue-800 flex items-center justify-center mx-auto mb-3">
-                                <AwardLucide className="h-8 w-8 text-white" />
-                              </div>
-                              <h4 className="font-bold text-gray-900">Nuestros Alumnos</h4>
-                              <p className="text-sm text-gray-600">Continúan el Legado</p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </section>
+                    
                   </TabsContent>
 
                   {/* Pestaña: Galería */}
