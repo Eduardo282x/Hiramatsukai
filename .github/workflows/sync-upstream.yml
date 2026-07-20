@@ -1,0 +1,25 @@
+name: Sync Upstream
+
+on:
+  # Se ejecuta automáticamente todos los días a medianoche (puedes cambiarlo)
+  schedule:
+    - cron: '0 0 * * *'
+  # Te permite ejecutar la sincronización manualmente desde la pestaña 'Actions' de GitHub
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout target repo
+        uses: actions/checkout@v4
+        with:
+          ref: main # Tu rama destino
+
+      - name: Sync Upstream
+        uses: a2ren/fork-sync-upstream@v1
+        with:
+          upstream_repository: 'UgazPro/Hiramatsukai' # Cambia esto por el repo de tu amigo
+          upstream_branch: 'main'                         # O la rama principal de él (ej: master)
+          target_branch: 'main'                           # Tu rama
+          git_pull_args: '--rebase'                       # O '--ff-only' según prefieras
