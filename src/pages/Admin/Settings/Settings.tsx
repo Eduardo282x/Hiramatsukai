@@ -10,7 +10,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { DojoBody, DojoScheduleBody, DojoSocialMedia, IDojoInfo, IDojoMartialArts } from "@/services/dojos/dojo.interface";
 import { useCreateDojoMonthlyPayment, useCreateDojoPaymentMethod, useCreateDojoSchedules, useDeleteDojoSchedule, useDojoMartialArts, useDojoMonthlyPayments, useDojoPaymentMethods, useDojosInfo, useUpdateDojoInfo, useUpdateDojoMonthlyPayment, useUpdateDojoPaymentMethod, useUpdateDojoSchedules } from "@/hooks/useDojos";
-import { IToken, useUserData } from "@/helpers/token";
+import { useUserData } from "@/helpers/token";
+import { IProfile } from "@/services/profile/profile.interface";
 import { Controller, useForm } from "react-hook-form";
 import { Separator } from "@/components/ui/separator";
 import { MonthlyPaymentBody, PaymentMethodBody } from "@/services/dojos/payments.interface";
@@ -36,7 +37,7 @@ const FALLBACK_DOJO_IMAGE = "https://blog.marti.mx/wp-content/uploads/2023/01/co
 
 export default function DojoConfigPage() {
 
-  const user: IToken = useUserData() as IToken;
+  const user: IProfile = useUserData() as IProfile;
 
   const { data: dojo, isLoading: isDojoLoading } = useDojosInfo(user.dojo.code || "");
   
@@ -320,7 +321,7 @@ export default function DojoConfigPage() {
 
           {/* Información Básica */}
           <TabsContent value="info" className="space-y-6">
-            <form onSubmit={form.handleSubmit(updateDojo)} className="grid grid-cols-1 lg:grid-cols-2">
+            <form onSubmit={form.handleSubmit(updateDojo)} className="grid grid-cols-1 lg:grid-cols-2 gap-4">
               {/* Información General */}
               <Card>
                 <CardHeader className="pt-4">
@@ -411,7 +412,7 @@ export default function DojoConfigPage() {
               </Card>
 
               {/* Contacto y Redes */}
-              <Card className="my-4">
+              <Card className="">
                 <CardHeader className="pt-4">
                   <CardTitle>Contacto y Redes Sociales</CardTitle>
                   <CardDescription>Información de contacto pública</CardDescription>
