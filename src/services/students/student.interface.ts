@@ -2,7 +2,7 @@
 import { IDojo, IDojoMartialArts, IRanks } from "../dojos/dojo.interface";
 
 export type ViewMode = "list" | "grid" | "cards" | "longCards";
-export type userRolesNames = "Administrador" | "Líder Maestro" | "Líder Instructor" | "Instructor" | "Estudiante" | "Representante";
+export type userRolesNames = "Administrador" | "Líder Maestro" | 'Comisión de Grado' | "Líder Instructor" | "Instructor" | "Estudiante" | "Representante";
 
 export interface IStudent {
     id: number;
@@ -132,7 +132,7 @@ export interface StudentBody {
     address: string;
     phone: string;
     dojoId: number;
-    rolId: number;
+    rolIds: number[];
     birthday: Date;
     enrollmentDate: Date;
     martialArtRank: MartialArtRank[];

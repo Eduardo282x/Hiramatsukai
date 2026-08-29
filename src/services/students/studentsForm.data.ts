@@ -1,14 +1,24 @@
 import { FormField } from "@/components/form/formComponent.interface";
 import { IOptions } from "@/components/form/renderFormComponents/SelectComponent";
-import { IRoles } from "./student.interface";
+import { IRoles, userRolesNames } from "./student.interface";
+
+export const studentRoleOrder: userRolesNames[] = [
+    "Administrador",
+    "Líder Maestro",
+    "Comisión de Grado",
+    "Líder Instructor",
+    "Instructor",
+    "Estudiante",
+    "Representante",
+];
 
 // === PASO 1: Datos Personales ===
 
 export const step1Col1Fields: FormField[] = [
-  { type: "text", name: "name", label: "Nombres" },
-  { type: "text", name: "lastName", label: "Apellidos" },
-  { type: "text", name: "identification", label: "Cédula" },
-  { type: "text", name: "username", label: "Usuario" },
+  { type: "text", name: "name", label: "Nombres", sanitize: "letters" },
+  { type: "text", name: "lastName", label: "Apellidos", sanitize: "letters" },
+  { type: "identification", name: "identification", label: "Cédula" },
+  { type: "text", name: "username", label: "Usuario", sanitize: "alphanumeric" },
 ];
 
 export const step1Col2Fields: FormField[] = [
@@ -24,7 +34,7 @@ export const step1Col2Fields: FormField[] = [
     ],
   },
   { type: "text", name: "email", label: "Correo Electrónico" },
-  { type: "text", name: "phone", label: "Teléfono" },
+  { type: "phone", name: "phone", label: "Teléfono" },
 ];
 
 export const step1Col3Fields: FormField[] = [
@@ -44,10 +54,10 @@ export const step2Col1Fields: (dojosOptions: IOptions[], roles: IRoles[], isAdmi
     disabled: !isAdmin,
   },
   {
-    type: "select",
-    name: "rolId",
+    type: "multiselect",
+    name: "rolIds",
     label: "Rol",
-    placeholder: "Seleccione un rol",
+    placeholder: "Seleccione uno o más roles",
     options: roles.map(r => ({ label: r.rol, value: r.id })),
   },
 ];
